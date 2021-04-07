@@ -26,6 +26,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Icon from 'react-native-vector-icons/AntDesign';
+
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
@@ -38,6 +40,7 @@ const Section = ({children, title}): Node => {
           },
         ]}>
         {title}
+        <Icon name="search1" />
       </Text>
       <Text
         style={[
@@ -52,7 +55,7 @@ const Section = ({children, title}): Node => {
   );
 };
 
-const App: () => Node = () => {
+const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
