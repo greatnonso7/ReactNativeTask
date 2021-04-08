@@ -1,300 +1,187 @@
-import {normalColors as colors, normalColors} from './colors';
-import {wp, hp} from './shared/resposive-dimension';
-import {isIOS} from './utils';
+import {StyleSheet} from 'react-native';
+import {
+  wp,
+  hp,
+  paddingTopiOS,
+  deviceWidth,
+} from '../shared/responsive-dimesion';
+import {normalColors as colors} from '../colors';
+import {globalStyle} from '../style';
 
-const font = {
-  fontFamily: 'Poppins-Regular',
-};
+const {main} = globalStyle(colors);
 
-export const light = {
-  fontFamily: 'Poppins-Light',
-  color: colors.dark,
-};
+export const styles = StyleSheet.create({
+  spectaText: {
+    ...main.regularText12,
+    fontSize: hp(11),
+    lineHeight: hp(14),
+    textAlign: 'center',
+    // borderWidth: 1,
+  },
+  spectaLogo: {
+    height: wp(38),
+    width: wp(38),
+    marginBottom: wp(5),
+    resizeMode: 'contain',
+    // borderWidth: 1,
+  },
+  imageRow: {
+    height: wp(88),
+    position: 'absolute',
+    width: wp(140),
+    zIndex: 1000,
+    resizeMode: 'contain',
+  },
+  imageRowContainer: {
+    // borderWidth: 1,
+    // width: wp(88 * 2),
+    overflow: 'visible',
+    flex: 1,
+    zIndex: 1000,
+  },
+  saleCount: {
+    ...main.boldText16,
+    marginRight: wp(20),
+    color: colors.grey400,
+  },
+  saleLabel: {
+    ...main.regularText16,
+    marginRight: wp(20),
+    color: colors.grey400,
+  },
+  durationText: {
+    ...main.regularText14,
+    // borderWidth: 1,
+  },
+  downIcon: {
+    height: wp(12),
+    width: wp(12),
+    marginLeft: wp(10),
+    tintColor: colors.red500,
+    // borderWidth: 1,
+  },
+  durationButton: {
+    width: wp(100),
+    height: hp(35),
+    borderWidth: wp(1.5),
+    borderRadius: wp(4),
+    borderColor: colors.red500,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  progress: {
+    width: wp(100),
+    backgroundColor: colors.red500,
+  },
+  growthBar: {
+    width: wp(200),
+    height: hp(5),
+    backgroundColor: colors.grey300,
+    borderRadius: wp(10),
+  },
+  row: {
+    // justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  rowSpaced: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  balanceText: {
+    ...main.boldText24,
+    paddingTop: hp(10),
+  },
+  sectionLabel: {
+    ...main.regularText16,
+    marginRight: wp(50),
+  },
+  percentText: {
+    ...main.regularText14,
+    color: colors.green500,
+    // borderWidth: 1,
+  },
+  balance: {
+    width: '100%',
+    paddingRight: 150,
+  },
+  summaryBody: {
+    width: '100%',
+    paddingHorizontal: wp(20),
+    backgroundColor: colors.white,
+    flex: 1,
+    marginTop: hp(3),
+    paddingTop: hp(10),
+  },
+  servicesListContainer: {
+    width: deviceWidth,
+    backgroundColor: colors.white,
+  },
+  gridIcon: {
+    height: wp(32),
+    width: wp(32),
+    resizeMode: 'contain',
+    marginBottom: wp(10),
+    // borderWidth: 1,
+  },
+  item: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    flex: 1,
+    margin: 0.7,
+    height: wp(88),
+    paddingTop: wp(10),
+    // borderWidth: 1,
+  },
+  itemInvisible: {
+    // backgroundColor: 'transparent',
+    backgroundColor: 'white',
+    zIndex: -100,
+  },
+  itemText: {
+    ...main.regularText12,
+    lineHeight: hp(15),
+    textAlign: 'center',
+    // borderWidth: 1,
+  },
 
-export const regular = {
-  fontFamily: 'Poppins-Regular',
-  color: colors.grey700,
-};
-
-export const medium = {
-  fontFamily: 'Poppins-Medium',
-  color: colors.dark,
-};
-
-export const semiBold = {
-  fontFamily: 'Poppins-SemiBold',
-  color: colors.dark,
-};
-
-export const bold = {
-  fontFamily: 'Poppins-Bold',
-  color: colors.dark,
-};
-
-export const globalStyle = (colors = normalColors) => ({
-  colors,
-  font,
-  light,
-  regular,
-  semiBold,
-  bold,
-  medium,
-  main: {
-    //Light Text sizes
-    lightText10: {
-      fontSize: hp(10),
-      lineHeight: hp(15),
-      ...light,
-    },
-
-    lightText12: {
-      fontSize: hp(12),
-      lineHeight: hp(18),
-      ...light,
-    },
-
-    lightText14: {
-      fontSize: hp(14),
-      lineHeight: hp(21),
-      ...light,
-    },
-
-    lightText16: {
-      fontSize: hp(16),
-      lineHeight: hp(24),
-      ...light,
-    },
-
-    lightText20: {
-      fontSize: hp(20),
-      lineHeight: hp(30),
-      ...light,
-    },
-
-    lightText24: {
-      fontSize: hp(24),
-      lineHeight: hp(36),
-      ...light,
-    },
-    lightText28: {
-      fontSize: hp(28),
-      lineHeight: hp(42),
-      ...light,
-    },
-    lightText36: {
-      fontSize: hp(36),
-      lineHeight: hp(54),
-      ...light,
-    },
-    lightText40: {
-      fontSize: hp(40),
-      lineHeight: hp(64),
-      ...light,
-    },
-    //Regular/Normal Text sizes
-    regularText10: {
-      fontSize: hp(10),
-      lineHeight: hp(15),
-      ...regular,
-    },
-
-    regularText12: {
-      fontSize: hp(12),
-      lineHeight: hp(18),
-      ...regular,
-    },
-
-    regularText14: {
-      fontSize: hp(14),
-      lineHeight: hp(21),
-      ...regular,
-    },
-
-    regularText16: {
-      fontSize: hp(16),
-      lineHeight: hp(24),
-      ...regular,
-    },
-
-    regularText20: {
-      fontSize: hp(20),
-      lineHeight: hp(30),
-      ...regular,
-    },
-
-    regularText24: {
-      fontSize: hp(24),
-      lineHeight: hp(36),
-      ...regular,
-    },
-    regularText28: {
-      fontSize: hp(28),
-      lineHeight: hp(42),
-      ...regular,
-    },
-    regularText36: {
-      fontSize: hp(36),
-      lineHeight: hp(54),
-      ...regular,
-    },
-    regularText40: {
-      fontSize: hp(40),
-      lineHeight: hp(64),
-      ...regular,
-    },
-    //Medium Text sizes
-    mediumText10: {
-      fontSize: hp(10),
-      lineHeight: hp(15),
-      ...medium,
-    },
-
-    mediumText12: {
-      fontSize: hp(12),
-      lineHeight: hp(18),
-      ...medium,
-    },
-
-    mediumText14: {
-      fontSize: hp(14),
-      lineHeight: hp(21),
-      ...medium,
-    },
-
-    mediumText16: {
-      fontSize: hp(16),
-      lineHeight: hp(24),
-      ...medium,
-    },
-
-    mediumText20: {
-      fontSize: hp(20),
-      lineHeight: hp(30),
-      ...medium,
-    },
-
-    mediumText24: {
-      fontSize: hp(24),
-      lineHeight: hp(36),
-      ...medium,
-    },
-    mediumText28: {
-      fontSize: hp(28),
-      lineHeight: hp(42),
-      ...medium,
-    },
-    mediumText36: {
-      fontSize: hp(36),
-      lineHeight: hp(54),
-      ...medium,
-    },
-    mediumText40: {
-      fontSize: hp(40),
-      lineHeight: hp(64),
-      ...medium,
-    },
-    //Semibold Text sizes
-    semiBoldText10: {
-      fontSize: hp(10),
-      lineHeight: hp(15),
-      ...semiBold,
-    },
-
-    semiBoldText12: {
-      fontSize: hp(12),
-      lineHeight: hp(18),
-      ...semiBold,
-    },
-
-    semiBoldText14: {
-      fontSize: hp(14),
-      lineHeight: hp(21),
-      ...semiBold,
-    },
-
-    semiBoldText16: {
-      fontSize: hp(16),
-      lineHeight: hp(24),
-      ...semiBold,
-    },
-
-    semiBoldText20: {
-      fontSize: hp(20),
-      lineHeight: hp(30),
-      ...semiBold,
-    },
-    semiBoldText24: {
-      fontSize: hp(24),
-      lineHeight: hp(36),
-      ...semiBold,
-    },
-    semiBoldText28: {
-      fontSize: hp(28),
-      lineHeight: hp(42),
-      ...semiBold,
-    },
-    semiBoldText36: {
-      fontSize: hp(36),
-      lineHeight: hp(54),
-      ...semiBold,
-    },
-    semiBoldText40: {
-      fontSize: hp(40),
-      lineHeight: hp(64),
-      ...semiBold,
-    },
-    //Bold Text sizes
-    boldText10: {
-      fontSize: hp(10),
-      lineHeight: hp(15),
-      ...bold,
-    },
-
-    boldText12: {
-      fontSize: hp(12),
-      lineHeight: hp(18),
-      ...bold,
-    },
-
-    boldText14: {
-      fontSize: hp(14),
-      lineHeight: hp(21),
-      ...bold,
-    },
-
-    boldText16: {
-      fontSize: hp(16),
-      lineHeight: hp(24),
-      ...bold,
-    },
-
-    boldText20: {
-      fontSize: hp(20),
-      lineHeight: hp(30),
-      ...bold,
-    },
-
-    boldText24: {
-      fontSize: hp(24),
-      lineHeight: hp(36),
-      ...bold,
-    },
-
-    boldText28: {
-      fontSize: hp(28),
-      lineHeight: hp(42),
-      ...bold,
-    },
-
-    boldText36: {
-      fontSize: hp(36),
-      lineHeight: hp(54),
-      ...bold,
-    },
-    boldText40: {
-      fontSize: hp(40),
-      lineHeight: hp(64),
-      ...bold,
-    },
+  headerIconLabel: {
+    ...main.regularText16,
+    color: colors.white,
+    marginTop: hp(6),
+  },
+  headerIcon: {
+    width: hp(32),
+    height: hp(32),
+    marginBottom: hp(6),
+  },
+  headerButton: {
+    width: wp(166),
+    height: hp(98),
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    // borderColor: 'white',
+    // borderWidth: 1,
+    paddingBottom: hp(16),
+  },
+  header: {
+    width: '100%',
+    paddingTop: paddingTopiOS + hp(16),
+    paddingBottom: hp(16),
+    paddingHorizontal: wp(16),
+    backgroundColor: colors.grey700,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+    height: '100%',
+  },
+  body: {
+    backgroundColor: '#4ec3e0',
   },
 });
