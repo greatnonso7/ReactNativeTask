@@ -1,12 +1,21 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 
+import 'react-native-gesture-handler';
+import {StatusBar, LogBox} from 'react-native';
+import AppNavigation from './navigations';
+
+if (!__DEV__) {
+  console.log = () => null;
+}
+
+console.warn = () => {};
+LogBox.ignoreAllLogs();
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>Piggy Task</Text>
-    </SafeAreaView>
+    <>
+      <StatusBar backgroundColor={'#fff'} barStyle="dark-content" />
+      <AppNavigation />
+    </>
   );
 };
 
