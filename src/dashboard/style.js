@@ -53,4 +53,38 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  buttonTitle: {
+    ...main.semiBoldText16,
+    color: colors.white,
+  },
+  taskTitle: {
+    ...main.regularText16,
+    color: '#757285',
+    paddingBottom: hp(10),
+  },
+  taskHeading: {
+    ...main.semiBoldText16,
+  },
+  completedHeading: {
+    ...main.semiBoldText16,
+    textDecorationLine: 'line-through',
+  },
+  tasksContainer: {
+    width: wp(330),
+    padding: hp(20),
+    backgroundColor: '#F9FAFC',
+    marginBottom: hp(10),
+    borderRadius: hp(20),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  radio: {
+    height: hp(30),
+    width: wp(30),
+    borderWidth: hp(2),
+    borderRadius: hp(50),
+    backgroundColor: colors.white,
+    borderColor: '#D4D5D7',
+  },
 });

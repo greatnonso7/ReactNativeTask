@@ -43,9 +43,9 @@ const Tab = createBottomTabNavigator();
 const getIcon = name => {
   switch (name.toLowerCase()) {
     case 'home':
-      return <Icon name="home" size={20} />;
+      return <Icon name="home" size={hp(35)} color={'#5A3EA4'} />;
     case 'setting':
-      return <Icon name="setting" size={20} />;
+      return <Icon name="setting" size={hp(35)} color={'#B8B6C3'} />;
 
     default:
       break;
@@ -79,6 +79,8 @@ function DashboardBottomTab() {
         },
         style: {
           height: wp(60) + getBottomSpace(),
+          flexDirection: 'row',
+          justifyContent: 'space-between',
           // backgroundColor: 'aqua',
         },
       }}>
@@ -95,7 +97,7 @@ function DashboardBottomTab() {
           },
         })}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         options={{
           tabBarIcon: () => (
             // <MiddleButton
@@ -115,7 +117,7 @@ function DashboardBottomTab() {
             console.log('wrong');
           },
         })}
-      />
+      /> */}
       <Tab.Screen
         options={{
           tabBarIcon: () => <RightButton isVisible={!isExpanded} />,
@@ -155,12 +157,12 @@ const styles = StyleSheet.create({
   },
   rightButtonsContainer: {
     position: 'absolute',
-    right: 0,
+    left: hp(30),
     flexDirection: 'row',
     alignItems: 'center',
   },
   leftButtonsContainer: {
-    left: 0,
+    right: hp(30),
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: hp(4),
     height: hp(48),
-    width: 80,
+    width: wp(80),
   },
 
   container: {
