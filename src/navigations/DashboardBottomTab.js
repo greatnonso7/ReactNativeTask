@@ -6,7 +6,10 @@ import {hp, wp, getBottomSpace} from '../shared/responsive-dimesion';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {globalStyle} from '../style';
 import {consumerNormalColors as colors} from '../colors';
+import Dashboard from '../dashboard';
+import Setting from '../dashboard/setting';
 import {useState} from 'react';
+import {useNavigation} from '@react-navigation/core';
 
 const hapticOptions = {
   enableVibrationFallBack: true,
@@ -88,7 +91,7 @@ function DashboardBottomTab() {
           tabBarIcon: () => <LeftButton isVisible={!isExpanded} />,
         }}
         name=" "
-        component={EmptyScreen}
+        component={Dashboard}
         listeners={({navigation, route}) => ({
           tabPress: e => {
             e.preventDefault();
@@ -98,10 +101,31 @@ function DashboardBottomTab() {
       />
       <Tab.Screen
         options={{
+          tabBarIcon: () => (
+            // <MiddleButton
+            // // handleLauncherPress={handleLauncherPress}
+            // // isExpanded={isExpanded}
+            // // isOverflowHidden={isOverflowHidden}
+            // />
+            <Icon name="plussquare" size={20} />
+          ),
+        }}
+        name="  "
+        component={Dashboard}
+        listeners={({navigation, route}) => ({
+          tabPress: e => {
+            e.preventDefault();
+            // navigation.navigate('Nearby');
+            console.log('wrong');
+          },
+        })}
+      />
+      <Tab.Screen
+        options={{
           tabBarIcon: () => <RightButton isVisible={!isExpanded} />,
         }}
         name="   "
-        component={EmptyScreen}
+        component={Setting}
         listeners={({navigation, route}) => ({
           tabPress: e => {
             e.preventDefault();
@@ -114,10 +138,14 @@ function DashboardBottomTab() {
 }
 
 const TabButton = ({routeName, onPress}) => {
+  const navigation = useNavigation();
   return (
-    <View accessibilityRole="button" style={styles.tabContainer}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate(routeName)}
+      accessibilityRole="button"
+      style={styles.tabContainer}>
       {getIcon(routeName)}
-    </View>
+    </TouchableOpacity>
   );
 };
 
