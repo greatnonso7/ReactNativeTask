@@ -1,7 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import RBSheet from 'react-native-raw-bottom-sheet';
 import {styles} from './style';
 
 import {images} from '../images';
@@ -10,6 +19,8 @@ import {hp} from '../shared/responsive-dimesion';
 const {profile} = images;
 
 const Dashboard = () => {
+  const refRBSheet = React.useRef();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
@@ -107,6 +118,34 @@ const Dashboard = () => {
           contentContainerStyle={{paddingRight: hp(50)}}
           keyExtractor={item => item.id.toString()}
         />
+      </View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#000',
+        }}>
+        <Button
+          title="OPEN BOTTOM SHEET"
+          onPress={() => refRBSheet.current.open()}
+        />
+        <RBSheet
+          ref={refRBSheet}
+          closeOnDragDown={true}
+          closeOnPressMask={false}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'transparent',
+            },
+            draggableIcon: {
+              backgroundColor: '#000',
+            },
+          }}>
+          <View>
+            <Text>Create a Task</Text>
+          </View>
+        </RBSheet>
       </View>
       <View style={{position: 'absolute', bottom: 0, right: hp(180)}}>
         <Text>Hello</Text>
