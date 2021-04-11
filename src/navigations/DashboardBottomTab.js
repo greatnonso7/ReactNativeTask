@@ -38,10 +38,6 @@ function RightButton({isVisible}) {
   }
 }
 
-function EmptyScreen() {
-  return null;
-}
-
 const Tab = createBottomTabNavigator();
 
 const getIcon = name => {
@@ -74,7 +70,7 @@ function DashboardBottomTab() {
     <Tab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: '#303041',
+        activeTintColor: 'red',
         inactiveTintColor: '#303041',
         tabStyle: {
           height: wp(60),
@@ -107,7 +103,7 @@ function DashboardBottomTab() {
             // // isExpanded={isExpanded}
             // // isOverflowHidden={isOverflowHidden}
             // />
-            <Icon name="plussquare" size={20} />
+            <Icon name="plussquare" size={50} style={styles.addButton} />
           ),
         }}
         name="  "
@@ -168,7 +164,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-
+  addButton: {
+    bottom: hp(20),
+    height: hp(50),
+  },
   arrowIcon: {
     marginLeft: wp(25),
     marginRight: wp(30),
@@ -188,5 +187,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     bottom: 0,
+    shadowOpacity: 0,
   },
 });
