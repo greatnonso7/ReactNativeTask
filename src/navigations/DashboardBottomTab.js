@@ -10,6 +10,8 @@ import Dashboard from '../dashboard';
 import Setting from '../dashboard/setting';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/core';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import MiddleButton from '../shared/middle-button';
 
 const hapticOptions = {
   enableVibrationFallBack: true,
@@ -97,15 +99,14 @@ function DashboardBottomTab() {
           },
         })}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         options={{
           tabBarIcon: () => (
-            // <MiddleButton
-            // // handleLauncherPress={handleLauncherPress}
-            // // isExpanded={isExpanded}
-            // // isOverflowHidden={isOverflowHidden}
-            // />
-            <Icon name="plussquare" size={50} style={styles.addButton} />
+            <MiddleButton
+              handleLauncherPress={handleLauncherPress}
+              isExpanded={isExpanded}
+              isOverflowHidden={isOverflowHidden}
+            />
           ),
         }}
         name="  "
@@ -114,10 +115,11 @@ function DashboardBottomTab() {
           tabPress: e => {
             e.preventDefault();
             // navigation.navigate('Nearby');
+            RBSheet.current.open();
             console.log('wrong');
           },
         })}
-      /> */}
+      />
       <Tab.Screen
         options={{
           tabBarIcon: () => <RightButton isVisible={!isExpanded} />,
@@ -157,12 +159,12 @@ const styles = StyleSheet.create({
   },
   rightButtonsContainer: {
     position: 'absolute',
-    left: hp(30),
+    left: hp(20),
     flexDirection: 'row',
     alignItems: 'center',
   },
   leftButtonsContainer: {
-    right: hp(30),
+    right: hp(20),
     flexDirection: 'row',
     alignItems: 'center',
   },
