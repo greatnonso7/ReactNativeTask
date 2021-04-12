@@ -95,6 +95,7 @@ export const styles = StyleSheet.create({
     width: wp(150),
     backgroundColor: '#F7F8FA',
     borderRadius: hp(10),
+    paddingLeft: hp(10),
   },
   taskScheduleTime: {
     flexDirection: 'row',
@@ -104,6 +105,7 @@ export const styles = StyleSheet.create({
     width: wp(150),
     backgroundColor: '#F7F8FA',
     borderRadius: hp(10),
+    paddingLeft: hp(10),
   },
   scheduleText: {
     ...main.semiBoldText14,

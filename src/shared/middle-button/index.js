@@ -118,39 +118,55 @@ const MiddleButton = () => {
                   onPress={showDatepicker}
                   style={styles.taskScheduleDate}>
                   <Icon name="calendar-plus" size={20} />
-                  <Text style={styles.scheduleText}>Select a date</Text>
+                  <View style={{flex: 1}}>
+                    {showDate === true ? (
+                      <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={'date'}
+                        is24Hour={true}
+                        display="calendar"
+                        onChange={onChange}
+                      />
+                    ) : (
+                      <Text style={styles.scheduleText}>Select a date</Text>
+                    )}
+                  </View>
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
                 onPress={showTimepicker}
                 style={styles.taskScheduleTime}>
                 <Icon name="clock-time-three-outline" size={20} />
-                <Text style={styles.scheduleText}>Select time</Text>
+                <View style={{flex: 1}}>
+                  {showTime === true ? (
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      value={date}
+                      mode={'date'}
+                      is24Hour={true}
+                      display="calendar"
+                      onChange={onChange}
+                    />
+                  ) : (
+                    <Text style={styles.scheduleText}>Select time</Text>
+                  )}
+                </View>
               </TouchableOpacity>
             </View>
           </View>
-          {/* {showDate && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={'date'}
-                is24Hour={true}
-                display="default"
-                onChange={onChange}
-                style={styles.scheduleText}
-              />
-            )}
-            {showTime && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={'time'}
-                is24Hour={true}
-                display="default"
-                onChange={onChange}
-                style={styles.scheduleText}
-              />
-            )} */}
+
+          {/* {showTime && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={'time'}
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+              style={styles.scheduleText}
+            />
+          )} */}
           <View style={[styles.inputContainer, {marginTop: hp(30)}]}>
             <View style={styles.submitButtonContainer}>
               <TouchableOpacity
