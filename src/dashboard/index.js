@@ -5,12 +5,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {styles} from './style';
 import {normalColors as colors} from '../colors';
+import {connect} from 'react-redux';
 import {images} from '../images';
 import {hp} from '../shared/responsive-dimesion';
 
 const {profile} = images;
 
-const Dashboard = () => {
+const Dashboard = props => {
   const [value, setValue] = React.useState({
     index: '1',
     task: 'My Day',
@@ -18,6 +19,15 @@ const Dashboard = () => {
   const selectType = (id, value) => {
     setValue({index: id, task: value});
   };
+
+  React.useEffect(() => {
+    props.getTasks();
+  });
+
+  {
+    console.log(props.tasks);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
@@ -173,4 +183,12 @@ const Completed = [
   },
 ];
 
-export default Dashboard;
+const mapStateToProps = ({Task}) => ({
+  tasks: Task.tasks,
+});
+
+const mapDispatchToProps = ({Task: {getTasks}}) => ({
+  getTasks: () => getTasks(),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
