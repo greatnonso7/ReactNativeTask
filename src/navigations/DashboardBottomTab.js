@@ -75,15 +75,15 @@ function DashboardBottomTab() {
         activeTintColor: 'red',
         inactiveTintColor: '#303041',
         tabStyle: {
-          height: wp(60),
-          paddingTop: wp(10),
-          // borderWidth: 1,
+          height: wp(70),
+          paddingBottom: wp(10),
         },
         style: {
-          height: wp(60) + getBottomSpace(),
+          height: wp(80) + getBottomSpace(),
           flexDirection: 'row',
           justifyContent: 'space-between',
           // backgroundColor: 'aqua',
+          borderTopWidth: hp(0),
         },
       }}>
       <Tab.Screen

@@ -44,12 +44,12 @@ const MiddleButton = () => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#000',
       }}>
-      <Button
-        title="OPEN BOTTOM SHEET"
-        onPress={() => refRBSheet.current.open()}
-      />
+      <TouchableOpacity
+        style={styles.homeButton}
+        onPress={() => refRBSheet.current.open()}>
+        <Icon name="plus" size={hp(40)} color={colors.white} />
+      </TouchableOpacity>
       <RBSheet
         ref={refRBSheet}
         closeOnDragDown={true}
