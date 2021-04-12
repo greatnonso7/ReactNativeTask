@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   Button,
+  TextInput,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -134,16 +135,63 @@ const Dashboard = () => {
           ref={refRBSheet}
           closeOnDragDown={true}
           closeOnPressMask={false}
+          height={hp(580)}
           customStyles={{
+            container: {
+              borderTopLeftRadius: hp(30),
+              borderTopRightRadius: hp(30),
+            },
             wrapper: {
               backgroundColor: 'transparent',
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 12,
+              },
+              shadowOpacity: 0.58,
+              shadowRadius: 16.0,
+
+              elevation: 24,
             },
+
             draggableIcon: {
               backgroundColor: '#000',
             },
           }}>
-          <View>
-            <Text>Create a Task</Text>
+          <View style={styles.bottomSheetContainer}>
+            <Text style={styles.bottomSheetTitle}>Create a Task</Text>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputHeader}>Task Title</Text>
+              <TextInput placeholder="Task Title" style={styles.textInput} />
+            </View>
+            <View style={[styles.inputContainer, {marginTop: hp(20)}]}>
+              <Text style={styles.inputHeader}>Task Type</Text>
+              <View style={styles.taskLevelContainer}>
+                <TouchableOpacity
+                  style={styles.taskLevelButton}
+                  activeOpacity={0.7}>
+                  <Text style={styles.taskLevelButtonText}>Important</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.taskLevelButton}
+                  activeOpacity={0.7}>
+                  <Text style={styles.taskLevelButtonText}>Planned</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={[styles.inputContainer, {marginTop: hp(30)}]}>
+              <Text style={styles.inputHeader}>Choose date & time</Text>
+              <View style={styles.taskScheduleContainer}>
+                <TouchableOpacity style={styles.taskScheduleDate}>
+                  <Icon name="calendar-plus" size={20} />
+                  <Text style={styles.scheduleText}>Select a date</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.taskScheduleTime}>
+                  <Icon name="clock-time-three-outline" size={20} />
+                  <Text style={styles.scheduleText}>Select time</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </RBSheet>
       </View>

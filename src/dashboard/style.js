@@ -1,10 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {
-  wp,
-  hp,
-  paddingTopiOS,
-  deviceWidth,
-} from '../shared/responsive-dimesion';
+import {wp, hp} from '../shared/responsive-dimesion';
 import {normalColors as colors} from '../colors';
 import {globalStyle} from '../style';
 
@@ -86,5 +81,74 @@ export const styles = StyleSheet.create({
     borderRadius: hp(50),
     backgroundColor: colors.white,
     borderColor: '#D4D5D7',
+  },
+  bottomSheetContainer: {
+    marginHorizontal: hp(20),
+  },
+  bottomSheetTitle: {
+    ...main.semiBoldText20,
+    textAlign: 'center',
+  },
+  inputContainer: {
+    marginTop: hp(10),
+  },
+  inputHeader: {
+    ...main.semiBoldText14,
+    color: '#888595',
+  },
+  textInput: {
+    height: hp(50),
+    width: wp(330),
+    borderWidth: 1,
+    marginTop: hp(10),
+    borderRadius: hp(10),
+    backgroundColor: '#F7F8FA',
+    paddingLeft: hp(10),
+    fontSize: hp(16),
+  },
+  taskLevelContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: hp(10),
+  },
+  taskLevelButton: {
+    height: hp(55),
+    width: hp(150),
+    backgroundColor: colors.purple300,
+    borderRadius: hp(10),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  taskLevelButtonText: {
+    ...main.semiBoldText16,
+    color: colors.white,
+  },
+  taskScheduleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: hp(20),
+  },
+  taskScheduleDate: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: hp(50),
+    width: wp(150),
+    backgroundColor: '#F7F8FA',
+    borderRadius: hp(10),
+  },
+  taskScheduleTime: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: hp(50),
+    width: wp(150),
+    backgroundColor: '#F7F8FA',
+    borderRadius: hp(10),
+  },
+  scheduleText: {
+    ...main.semiBoldText14,
+    paddingLeft: hp(5),
   },
 });
