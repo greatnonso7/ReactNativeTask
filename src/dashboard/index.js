@@ -24,9 +24,7 @@ const Dashboard = props => {
     props.getTasks();
   });
 
-  {
-    console.log(props.tasks);
-  }
+  console.log(props.tasks, 'my tasks');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -113,7 +111,6 @@ const Dashboard = props => {
       </View>
       <View style={{marginTop: hp(20), marginHorizontal: hp(20)}}>
         <Text style={styles.taskTitle}>Completed</Text>
-
         <FlatList
           data={Completed}
           renderItem={({item}) => (

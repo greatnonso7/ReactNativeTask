@@ -61,7 +61,6 @@ export const styles = StyleSheet.create({
     marginTop: hp(10),
     borderRadius: hp(10),
     backgroundColor: '#F7F8FA',
-    borderColor: '#F0F1F2',
     paddingLeft: hp(10),
     fontSize: hp(16),
   },
@@ -152,5 +151,11 @@ export const styles = StyleSheet.create({
     elevation: 9,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  errorText: {
+    ...main.regularText12,
+    paddingLeft: hp(10),
+    paddingTop: hp(5),
+    color: colors.red,
   },
 });

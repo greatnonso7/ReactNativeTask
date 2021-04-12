@@ -1,6 +1,4 @@
 import {reducerActions as reducers} from './reducer';
-import {sleep} from '../../utils';
-import {db} from '../../db';
 
 const IState = {
   isError: false,
@@ -18,14 +16,27 @@ export const Task = {
       if (state.Task.tasks > 0) return;
 
       try {
-        const data = await sleep(1000, db.getSecretQuestions);
+        const data = await state.Task.tasks;
         if (data) {
-          dispatch.Task.setState({
-            tasks: data,
-          });
+          return data;
         }
       } catch (error) {
         this.handleError(error);
+      }
+    },
+
+    async addSingleTask({callback, data}, state) {
+      dispatch.Task.setError(false);
+      console.log(state, 'my state');
+      try {
+        console.log(typeof state.Task.tasks);
+        const response = state.Task.tasks.push(data);
+        console.log(response, 'response data');
+        if (response) {
+          console.log('Hello world');
+        }
+      } catch (e) {
+        this.handleError(e);
       }
     },
 

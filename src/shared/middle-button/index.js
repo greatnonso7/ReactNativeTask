@@ -3,28 +3,36 @@ import React from 'react';
 import {View, Text, TextInput, TouchableOpacity, Button} from 'react-native';
 import {styles} from './style';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import {connect} from 'react-redux';
 import {hp, wp} from '../responsive-dimesion';
 import {normalColors as colors} from '../../colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const MiddleButton = () => {
+const MiddleButton = props => {
   const refRBSheet = React.useRef();
-  const [date, setDate] = React.useState(new Date(1598051730000));
+  const [date, setDate] = React.useState(new Date(Date.now()));
+  const [time, setTime] = React.useState(new Date().getTime());
   const [showTime, setShowTime] = React.useState(false);
   const [showDate, setShowDate] = React.useState(false);
+  const [task, setTask] = React.useState('');
+  const [error, setError] = React.useState(false);
 
   const [value, setValue] = React.useState({
     index: '1',
     task: 'Important',
   });
 
-  const onChange = (event, selectedDate) => {
+  const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     // setShow(Platform.OS === 'ios');
     setDate(currentDate);
   };
-
+  const onTimeChange = (event, selectedTime) => {
+    const currentDate = selectedTime;
+    // setShow(Platform.OS === 'ios');
+    setTime(currentDate);
+  };
   const showDatepicker = () => {
     setShowDate(true);
   };
@@ -37,6 +45,29 @@ const MiddleButton = () => {
     setValue({index: id, task: value});
   };
 
+  const addTask = async () => {
+    if (!task || task.length === 0) {
+      return setError(true);
+    }
+
+    const data = {
+      // taskId: Math.random().toString(36).substring(2),
+      task,
+      taskLevel: value.task,
+      date,
+      time,
+      isCompleted: '0',
+    };
+
+    await props.addSingleTask({data});
+    console.log(data);
+
+    refRBSheet.current.close();
+    setTask('');
+    setError(false);
+    setDate(new Date(Date.now()));
+    setTime(new Date().getTime());
+  };
   return (
     <View
       style={{
@@ -80,7 +111,18 @@ const MiddleButton = () => {
           <Text style={styles.bottomSheetTitle}>Create a Task</Text>
           <View style={styles.inputContainer}>
             <Text style={styles.inputHeader}>Task Title</Text>
-            <TextInput placeholder="Task Title" style={styles.textInput} />
+            <TextInput
+              placeholder="Task Title"
+              value={task}
+              onChangeText={task => setTask(task)}
+              style={[
+                styles.textInput,
+                {borderColor: error ? colors.red500 : '#F0F1F2'},
+              ]}
+            />
+            {error && (
+              <Text style={styles.errorText}>Task title is required</Text>
+            )}
           </View>
           <View style={[styles.inputContainer, {marginTop: hp(20)}]}>
             <Text style={styles.inputHeader}>Task Type</Text>
@@ -126,7 +168,7 @@ const MiddleButton = () => {
                         mode={'date'}
                         is24Hour={true}
                         display="calendar"
-                        onChange={onChange}
+                        onChange={onDateChange}
                       />
                     ) : (
                       <Text style={styles.scheduleText}>Select a date</Text>
@@ -142,11 +184,11 @@ const MiddleButton = () => {
                   {showTime === true ? (
                     <DateTimePicker
                       testID="dateTimePicker"
-                      value={date}
-                      mode={'date'}
+                      value={time}
+                      mode={'time'}
                       is24Hour={true}
                       display="calendar"
-                      onChange={onChange}
+                      onChange={onTimeChange}
                     />
                   ) : (
                     <Text style={styles.scheduleText}>Select time</Text>
@@ -156,22 +198,11 @@ const MiddleButton = () => {
             </View>
           </View>
 
-          {/* {showTime && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={'time'}
-              is24Hour={true}
-              display="default"
-              onChange={onChange}
-              style={styles.scheduleText}
-            />
-          )} */}
           <View style={[styles.inputContainer, {marginTop: hp(30)}]}>
             <View style={styles.submitButtonContainer}>
               <TouchableOpacity
                 activeOpacity={0.6}
-                onPress={() => refRBSheet.current.close()}
+                onPress={addTask}
                 style={styles.submitButton}>
                 <Text style={styles.submitButtonText}>Done</Text>
               </TouchableOpacity>
@@ -195,4 +226,12 @@ const TaskType = [
   },
 ];
 
-export default MiddleButton;
+const mapStateToProps = ({Task}) => ({
+  isError: Task.isError,
+});
+
+const mapDispatchToProps = ({Task: {addSingleTask}}) => ({
+  addSingleTask: data => addSingleTask(data),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiddleButton);
