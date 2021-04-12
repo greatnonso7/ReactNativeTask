@@ -50,14 +50,13 @@ const Dashboard = () => {
     setValue({index: id, task: value});
   };
 
-  console.log(value);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
         <View style={styles.headerContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Hello,</Text>
-            <Text style={styles.name}>Abdur Rahman</Text>
+            <Text style={styles.name}>Ichoku Chinonso</Text>
           </View>
           <View style={styles.profileContainer}>
             <Image
@@ -149,6 +148,7 @@ const Dashboard = () => {
           keyExtractor={item => item.id.toString()}
         />
       </View>
+
       <View
         style={{
           flex: 1,
@@ -169,6 +169,7 @@ const Dashboard = () => {
             container: {
               borderTopLeftRadius: hp(30),
               borderTopRightRadius: hp(30),
+              height: '70%',
             },
             wrapper: {
               backgroundColor: 'transparent',
@@ -243,7 +244,7 @@ const Dashboard = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            {showDate && (
+            {/* {showDate && (
               <DateTimePicker
                 testID="dateTimePicker"
                 value={date}
@@ -264,7 +265,16 @@ const Dashboard = () => {
                 onChange={onChange}
                 style={styles.scheduleText}
               />
-            )}
+            )} */}
+            <View style={[styles.inputContainer, {marginTop: hp(30)}]}>
+              <View style={styles.submitButtonContainer}>
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  style={styles.submitButton}>
+                  <Text style={styles.submitButtonText}>Done</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </RBSheet>
       </View>

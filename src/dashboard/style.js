@@ -150,4 +150,29 @@ export const styles = StyleSheet.create({
     ...main.semiBoldText14,
     paddingLeft: hp(5),
   },
+  submitButtonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: hp(30),
+  },
+  submitButton: {
+    height: hp(65),
+    width: hp(330),
+    backgroundColor: '#FD93A1',
+    borderRadius: hp(20),
+    shadowColor: '#FD93A1',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  submitButtonText: {
+    ...main.semiBoldText20,
+    color: colors.white,
+  },
 });
