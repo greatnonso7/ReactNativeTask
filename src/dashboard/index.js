@@ -7,11 +7,14 @@ import {styles} from './style';
 import {normalColors as colors} from '../colors';
 import {connect} from 'react-redux';
 import {images} from '../images';
+import Moment from 'moment';
 import {hp} from '../shared/responsive-dimesion';
 
 const {profile} = images;
 
 const Dashboard = props => {
+  const [ignored, forceUpdate] = React.useReducer(x => x + 1, 0);
+
   const [value, setValue] = React.useState({
     index: '1',
     task: 'My Day',
@@ -22,9 +25,15 @@ const Dashboard = props => {
 
   React.useEffect(() => {
     props.getTasks();
+    forceUpdate();
+    console.log('Called how many times');
   });
+  const tasks = props.tasks;
 
-  console.log(props.tasks, 'my tasks');
+  const completeTask = async id => {
+    await props.completeTask(id);
+    console.log(id);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -82,60 +91,77 @@ const Dashboard = props => {
         }}>
         <Text style={styles.taskTitle}>Tasks</Text>
 
-        <FlatList
-          data={Tasks}
-          renderItem={({item}) => (
-            <View key={item.id} style={styles.tasksContainer}>
-              <View>
-                <Text style={styles.taskHeading}>{item.title}</Text>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Icon name="calendar-today" size={25} />
-                  <Text>{item.date}</Text>
-                </View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Icon name="alarm" size={20} />
-                  <Text>{item.time}</Text>
-                </View>
-              </View>
-              <View>
-                <TouchableOpacity>
-                  <View style={styles.radio} />
-                </TouchableOpacity>
-              </View>
+        {tasks &&
+          tasks.map(item => (
+            <View>
+              <Text>{item.task}</Text>
             </View>
-          )}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingRight: hp(50)}}
-          keyExtractor={item => item.id.toString()}
-        />
+          ))}
+
+        {/* {props.tasks.length === 0 ? (
+          <View>
+            <Text>No Tasks have been added</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={props.tasks}
+            renderItem={({item}) => (
+              <View key={item.taskId} style={styles.tasksContainer}>
+                <View>
+                  <Text style={styles.taskHeading}>{item.task}</Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon name="calendar-today" size={25} />
+                    <Text>{Moment(item.date).format('DD-MM-YYYY')}</Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon name="alarm" size={23} />
+                    <Text>{Moment(item.time).format('LT')}</Text>
+                  </View>
+                </View>
+                <View>
+                  <TouchableOpacity onPress={() => completeTask(item.taskId)}>
+                    <View style={styles.radio} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingRight: hp(50)}}
+            keyExtractor={item => item.taskId.toString()}
+          />
+        )} */}
       </View>
       <View style={{marginTop: hp(20), marginHorizontal: hp(20)}}>
         <Text style={styles.taskTitle}>Completed</Text>
         <FlatList
-          data={Completed}
-          renderItem={({item}) => (
-            <View key={item.id} style={styles.tasksContainer}>
-              <View>
-                <Text style={styles.completedHeading}>{item.title}</Text>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Icon name="calendar-today" size={25} />
-                  <Text>{item.date}</Text>
+          data={props.tasks}
+          renderItem={({item}) =>
+            props.tasks.length && item.isCompleted === '1' ? (
+              <View key={item.id} style={styles.tasksContainer}>
+                <View>
+                  <Text style={styles.completedHeading}>{item.task}</Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon name="calendar-today" size={25} />
+                    <Text>{Moment(item.date).format('DD-MM-YYYY')}</Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon name="alarm" size={20} />
+                    <Text>{item.time}</Text>
+                  </View>
                 </View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Icon name="alarm" size={20} />
-                  <Text>{item.time}</Text>
+                <View>
+                  <TouchableOpacity>
+                    <Icon name="check-circle" color="#5a3ea4" size={35} />
+                  </TouchableOpacity>
                 </View>
               </View>
-              <View>
-                <TouchableOpacity>
-                  <Icon name="check-circle" color="#5a3ea4" size={35} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
+            ) : (
+              <Text>No Completed Task</Text>
+            )
+          }
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{paddingRight: hp(50)}}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={item => item.task.toString()}
         />
       </View>
     </SafeAreaView>
@@ -184,8 +210,9 @@ const mapStateToProps = ({Task}) => ({
   tasks: Task.tasks,
 });
 
-const mapDispatchToProps = ({Task: {getTasks}}) => ({
+const mapDispatchToProps = ({Task: {getTasks, completeTask}}) => ({
   getTasks: () => getTasks(),
+  completeTask: id => completeTask(id),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

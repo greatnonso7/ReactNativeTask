@@ -9,7 +9,7 @@ const AppNav = props => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={'Home'}
+        initialRouteName={'Dashboard'}
         screenOptions={{headerShown: false}}>
         <Stack.Screen
           name="Dashboard"

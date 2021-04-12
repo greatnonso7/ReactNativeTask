@@ -31,12 +31,22 @@ export const Task = {
       try {
         console.log(typeof state.Task.tasks);
         const response = state.Task.tasks.push(data);
-        console.log(response, 'response data');
         if (response) {
-          console.log('Hello world');
+          this.getTasks();
         }
       } catch (e) {
         this.handleError(e);
+      }
+    },
+    async completeTask(id, state) {
+      dispatch.Task.setError(false);
+      try {
+        const data = state.Task.tasks.findIndex(task => task.taskId === id);
+        state.Task.tasks[data] = {...state.Task.tasks[data], isCompleted: '1'};
+        dispatch.Task.setState(state.Task.tasks);
+      } catch (error) {
+        console.log(error);
+        dispatch.Account.setError(true);
       }
     },
 

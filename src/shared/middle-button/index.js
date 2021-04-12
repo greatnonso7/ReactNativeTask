@@ -8,11 +8,12 @@ import {hp, wp} from '../responsive-dimesion';
 import {normalColors as colors} from '../../colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {useNavigation} from '@react-navigation/core';
 
 const MiddleButton = props => {
   const refRBSheet = React.useRef();
   const [date, setDate] = React.useState(new Date(Date.now()));
-  const [time, setTime] = React.useState(new Date().getTime());
+  const [time, setTime] = React.useState(new Date(Date.now()));
   const [showTime, setShowTime] = React.useState(false);
   const [showDate, setShowDate] = React.useState(false);
   const [task, setTask] = React.useState('');
@@ -22,6 +23,8 @@ const MiddleButton = props => {
     index: '1',
     task: 'Important',
   });
+
+  const navigation = useNavigation();
 
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -51,7 +54,7 @@ const MiddleButton = props => {
     }
 
     const data = {
-      // taskId: Math.random().toString(36).substring(2),
+      taskId: Math.random().toString(36).substring(2),
       task,
       taskLevel: value.task,
       date,
@@ -67,6 +70,7 @@ const MiddleButton = props => {
     setError(false);
     setDate(new Date(Date.now()));
     setTime(new Date().getTime());
+    // navigation.push('Dashboard');
   };
   return (
     <View
