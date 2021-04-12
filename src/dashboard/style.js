@@ -114,7 +114,6 @@ export const styles = StyleSheet.create({
   taskLevelButton: {
     height: hp(55),
     width: hp(150),
-    backgroundColor: colors.purple300,
     borderRadius: hp(10),
     justifyContent: 'center',
     alignItems: 'center',
