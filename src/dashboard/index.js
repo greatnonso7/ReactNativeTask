@@ -1,24 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  FlatList,
-  TouchableOpacity,
-  Button,
-  TextInput,
-  Platform,
-} from 'react-native';
+import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {styles} from './style';
+import {normalColors as colors} from '../colors';
 import {images} from '../images';
 import {hp} from '../shared/responsive-dimesion';
 
 const {profile} = images;
 
 const Dashboard = () => {
+  const [value, setValue] = React.useState({
+    index: '1',
+    task: 'My Day',
+  });
+  const selectType = (id, value) => {
+    setValue({index: id, task: value});
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
@@ -43,8 +42,23 @@ const Dashboard = () => {
             <TouchableOpacity
               activeOpacity={0.7}
               key={item.id}
-              style={styles.navButtons}>
-              <Text style={styles.buttonTitle}>{item.title}</Text>
+              onPress={() => selectType(item.id, item.type)}
+              style={[
+                styles.navButtons,
+                {
+                  backgroundColor:
+                    value.index === item.id ? colors.purple300 : '#F7F8FA',
+                },
+              ]}>
+              <Text
+                style={[
+                  styles.buttonTitle,
+                  {
+                    color: value.index === item.id ? colors.white : '#000',
+                  },
+                ]}>
+                {item.title}
+              </Text>
             </TouchableOpacity>
           )}
           horizontal

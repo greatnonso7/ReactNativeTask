@@ -37,7 +37,6 @@ const MiddleButton = () => {
     setValue({index: id, task: value});
   };
 
-  console.log(value);
   return (
     <View
       style={{
@@ -71,10 +70,8 @@ const MiddleButton = () => {
             },
             shadowOpacity: 0.58,
             shadowRadius: 16.0,
-
             elevation: 24,
           },
-
           draggableIcon: {
             backgroundColor: '#000',
           },
